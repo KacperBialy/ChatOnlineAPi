@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChatOnlineApi</name>
+    </assembly>
+    <members>
+        <member name="M:ChatOnlineApi.Controllers.AccountController.RegisterUser">
+            <summary>
+            Register the user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.AccountController.LogginUser">
+            <summary>
+            User login
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.HealthChecksController.GetAsync">
+            <summary>
+            Check Api condition
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.MessagesController.GetAll">
+            <summary>
+            Retrieves all messages from the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.MessagesController.Post">
+            <summary>
+            Sends a message to the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.MessagesController.Put">
+            <summary>
+            Modifies a message sent to the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.MessagesController.Delete">
+            <summary>
+            Delete a message sent to the specified user
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
