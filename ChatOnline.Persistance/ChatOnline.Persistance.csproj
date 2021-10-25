@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ChatOnline.Common\ChatOnline.Common.csproj" />
+  </ItemGroup>
+
 </Project>
