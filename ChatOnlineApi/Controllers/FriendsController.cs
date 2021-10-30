@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace ChatOnlineApi.Controllers
 {
-    [ApiController]
-    [Route("api/{userId}/messages")]
-    [EnableCors("MyAllowSpecificOrigins")]
-    public class MessagesController : Controller
+    public class FriendsController : Controller
     {
         /// <summary>
-        /// Retrieves all messages from the specified user
+        /// Retrieves all friends from the specified user
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -27,7 +23,7 @@ namespace ChatOnlineApi.Controllers
         }
 
         /// <summary>
-        /// Sends a message to the specified user
+        /// Add the specified user to group of friends
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -41,23 +37,10 @@ namespace ChatOnlineApi.Controllers
         }
 
         /// <summary>
-        /// Modifies a message sent to the specified user
+        /// Delete the specified user from group of friends
         /// </summary>
         /// <returns></returns>
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<string>> Put()
-        {
-            return "Not implemented";
-        }
-
-        /// <summary>
-        /// Delete a message sent to the specified user
-        /// </summary>
-        /// <returns></returns>
-        [HttpDelete("{messageId}")]
+        [HttpDelete("{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

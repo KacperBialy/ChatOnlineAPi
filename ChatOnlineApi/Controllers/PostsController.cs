@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace ChatOnlineApi.Controllers
 {
-    [ApiController]
-    [Route("api/{userId}/messages")]
-    [EnableCors("MyAllowSpecificOrigins")]
-    public class MessagesController : Controller
+    public class PostsController : Controller
     {
         /// <summary>
-        /// Retrieves all messages from the specified user
+        /// Retrieves all posts from the specified user
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -27,7 +23,7 @@ namespace ChatOnlineApi.Controllers
         }
 
         /// <summary>
-        /// Sends a message to the specified user
+        /// Creation of a post by the user
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -41,7 +37,7 @@ namespace ChatOnlineApi.Controllers
         }
 
         /// <summary>
-        /// Modifies a message sent to the specified user
+        /// Modifies a post created by the specified user
         /// </summary>
         /// <returns></returns>
         [HttpPut]
@@ -54,10 +50,10 @@ namespace ChatOnlineApi.Controllers
         }
 
         /// <summary>
-        /// Delete a message sent to the specified user
+        /// Delete a post created by the specified user
         /// </summary>
         /// <returns></returns>
-        [HttpDelete("{messageId}")]
+        [HttpDelete("{postId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
