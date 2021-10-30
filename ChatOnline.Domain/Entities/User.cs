@@ -11,8 +11,8 @@ namespace ChatOnline.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public ICollection<Message> Messages { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
+        public ICollection<Post> Posts { get; set; } = new List<Post>();
         public Password Password { get; set; }
     }
 }
