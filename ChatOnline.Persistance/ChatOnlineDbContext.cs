@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ChatOnline.Domain.Common;
+using ChatOnline.Domain.Entities;
 
 namespace ChatOnline.Persistance
 {
@@ -13,14 +14,24 @@ namespace ChatOnline.Persistance
     {
         public ChatOnlineDbContext(DbContextOptions<ChatOnlineDbContext> options) : base(options)
         {
+        }
 
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Password> Passwords { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<User> Users { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.SeedData();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
-                switch(entry.State)
+                switch (entry.State)
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedBy = string.Empty;

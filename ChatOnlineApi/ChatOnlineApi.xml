@@ -16,6 +16,24 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ChatOnlineApi.Controllers.FriendsController.GetAll">
+            <summary>
+            Retrieves all friends from the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.FriendsController.Post">
+            <summary>
+            Add the specified user to group of friends
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.FriendsController.Delete">
+            <summary>
+            Delete the specified user from group of friends
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:ChatOnlineApi.Controllers.HealthChecksController.GetAsync">
             <summary>
             Check Api condition
@@ -43,6 +61,30 @@
         <member name="M:ChatOnlineApi.Controllers.MessagesController.Delete">
             <summary>
             Delete a message sent to the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.PostsController.GetAll">
+            <summary>
+            Retrieves all posts from the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.PostsController.Post">
+            <summary>
+            Creation of a post by the user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.PostsController.Put">
+            <summary>
+            Modifies a post created by the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.PostsController.Delete">
+            <summary>
+            Delete a post created by the specified user
             </summary>
             <returns></returns>
         </member>
