@@ -9,6 +9,7 @@ using ChatOnline.Domain.Common;
 using System.Reflection;
 using ChatOnline.Domain.Entities;
 using ChatOnline.Application.Common.Interfaces;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ChatOnline.Persistance
 {
