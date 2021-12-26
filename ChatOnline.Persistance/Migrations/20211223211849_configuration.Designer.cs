@@ -4,14 +4,16 @@ using ChatOnline.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChatOnline.Persistance.Migrations
 {
     [DbContext(typeof(ChatOnlineDbContext))]
-    partial class ChatOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211223211849_configuration")]
+    partial class configuration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +29,7 @@ namespace ChatOnline.Persistance.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -66,28 +66,6 @@ namespace ChatOnline.Persistance.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Messages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "Hi, what's up?",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2021, 12, 26, 0, 25, 23, 907, DateTimeKind.Local).AddTicks(6855),
-                            FriendId = 2,
-                            StatusId = 0,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = "I'm fine! And you?",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2021, 12, 27, 0, 25, 23, 910, DateTimeKind.Local).AddTicks(9747),
-                            FriendId = 1,
-                            StatusId = 0,
-                            UserId = 2
-                        });
                 });
 
             modelBuilder.Entity("ChatOnline.Domain.Entities.Password", b =>
@@ -98,7 +76,6 @@ namespace ChatOnline.Persistance.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("HashPassword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -120,8 +97,6 @@ namespace ChatOnline.Persistance.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
@@ -197,12 +172,6 @@ namespace ChatOnline.Persistance.Migrations
                             Id = 3,
                             Name = "Kuba",
                             Surname = "Czarnobrody"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Adam",
-                            Surname = "Malisz"
                         });
                 });
 

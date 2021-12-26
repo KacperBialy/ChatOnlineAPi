@@ -4,14 +4,16 @@ using ChatOnline.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChatOnline.Persistance.Migrations
 {
     [DbContext(typeof(ChatOnlineDbContext))]
-    partial class ChatOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211225232524_changeTablesNames")]
+    partial class changeTablesNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -4,14 +4,16 @@ using ChatOnline.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChatOnline.Persistance.Migrations
 {
     [DbContext(typeof(ChatOnlineDbContext))]
-    partial class ChatOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211225230751_extendSeedData")]
+    partial class extendSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace ChatOnline.Persistance.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
 
                     b.HasData(
                         new
@@ -73,7 +75,7 @@ namespace ChatOnline.Persistance.Migrations
                             Id = 1,
                             Content = "Hi, what's up?",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2021, 12, 26, 0, 25, 23, 907, DateTimeKind.Local).AddTicks(6855),
+                            Date = new DateTime(2021, 12, 26, 0, 7, 50, 563, DateTimeKind.Local).AddTicks(7950),
                             FriendId = 2,
                             StatusId = 0,
                             UserId = 1
@@ -83,7 +85,7 @@ namespace ChatOnline.Persistance.Migrations
                             Id = 2,
                             Content = "I'm fine! And you?",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2021, 12, 27, 0, 25, 23, 910, DateTimeKind.Local).AddTicks(9747),
+                            Date = new DateTime(2021, 12, 27, 0, 7, 50, 566, DateTimeKind.Local).AddTicks(7244),
                             FriendId = 1,
                             StatusId = 0,
                             UserId = 2
@@ -109,7 +111,7 @@ namespace ChatOnline.Persistance.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Passwords");
+                    b.ToTable("Password");
                 });
 
             modelBuilder.Entity("ChatOnline.Domain.Entities.Post", b =>

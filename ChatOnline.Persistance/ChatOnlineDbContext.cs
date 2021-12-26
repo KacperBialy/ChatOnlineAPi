@@ -6,17 +6,21 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ChatOnline.Domain.Common;
+using System.Reflection;
 using ChatOnline.Domain.Entities;
+using ChatOnline.Application.Common.Interfaces;
 
 namespace ChatOnline.Persistance
 {
     public class ChatOnlineDbContext : DbContext
     {
-        public ChatOnlineDbContext(DbContextOptions<ChatOnlineDbContext> options) : base(options)
+        private readonly IDateTime _dateTime;
+        public ChatOnlineDbContext(DbContextOptions<ChatOnlineDbContext> options, IDateTime dateTime) : base(options)
         {
+            _dateTime = dateTime;
         }
 
-        public DbSet<Message> Messages { get; set; }
+        public DbSet<Password> Messages { get; set; }
         public DbSet<Password> Passwords { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
@@ -24,6 +28,8 @@ namespace ChatOnline.Persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // method indicates all EF CORE configuration (classes which implements IEntityTypeConfiguration)
+
             modelBuilder.SeedData();
         }
 
@@ -35,21 +41,21 @@ namespace ChatOnline.Persistance
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedBy = string.Empty;
-                        entry.Entity.Created = DateTime.Now;
+                        entry.Entity.Created = _dateTime.Now;
                         entry.Entity.StatusId = 1;
                         break;
 
                     case EntityState.Modified:
                         entry.Entity.ModifiedBy = string.Empty;
-                        entry.Entity.Modified = DateTime.Now;
+                        entry.Entity.Modified = _dateTime.Now;
                         entry.Entity.StatusId = 1;
                         break;
 
                     case EntityState.Deleted:
                         entry.Entity.ModifiedBy = string.Empty;
-                        entry.Entity.Modified = DateTime.Now;
+                        entry.Entity.Modified = _dateTime.Now;
                         entry.Entity.InactivatedBy = string.Empty;
-                        entry.Entity.Inactivated = DateTime.Now;
+                        entry.Entity.Inactivated = _dateTime.Now;
                         entry.Entity.StatusId = 0;
                         entry.State = EntityState.Modified; // Show entity framework that we do not want to delete entity
                         break;
