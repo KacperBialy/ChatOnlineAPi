@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChatOnline.Application\ChatOnline.Application.csproj" />
     <ProjectReference Include="..\ChatOnline.Domain\ChatOnline.Domain.csproj" />
   </ItemGroup>
 

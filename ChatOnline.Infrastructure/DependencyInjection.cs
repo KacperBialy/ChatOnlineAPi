@@ -1,4 +1,5 @@
 ﻿using ChatOnline.Application.Common.Interfaces;
+using ChatOnline.Infrastructure.FileStore;
 using ChatOnline.Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,10 @@ namespace ChatOnline.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IDateTime,DateTimeService>();
+            services.AddTransient<IDateTime, DateTimeService>();
+            services.AddTransient<IFileStore, FileStore.FileStore>();
+            services.AddTransient<IFileWrapper, FileWrapper>();
+            services.AddTransient<IDirectoryWrapper, DirectoryWrapper>();   
 
             return services;
         }
