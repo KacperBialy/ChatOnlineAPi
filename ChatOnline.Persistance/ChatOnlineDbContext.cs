@@ -13,7 +13,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace ChatOnline.Persistance
 {
-    public class ChatOnlineDbContext : DbContext
+    public class ChatOnlineDbContext : DbContext, IChatOnlineDbContext
     {
         private readonly IDateTime _dateTime;
         public ChatOnlineDbContext(DbContextOptions<ChatOnlineDbContext> options, IDateTime dateTime) : base(options)

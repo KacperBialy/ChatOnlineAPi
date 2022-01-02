@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ChatOnline.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,8 @@ namespace ChatOnline.Persistance
         public static IServiceCollection AddPersistance(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ChatOnlineDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ChatOnlineDatabase")));
+
+            services.AddScoped<IChatOnlineDbContext, ChatOnlineDbContext>();
 
             return services;
         }
