@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChatOnline.Application.Users.GetUserDetail
+namespace ChatOnline.Application.Users.GetUserDetail.Queries
 {
     public class GetUserDetailQueryHandler : IRequestHandler<GetUserDetailQuery, UserDetailViewModel>
     {

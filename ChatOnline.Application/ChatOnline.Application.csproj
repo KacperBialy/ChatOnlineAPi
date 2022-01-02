@@ -17,4 +17,8 @@
     <ProjectReference Include="..\ChatOnline.Domain\ChatOnline.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Users\GetUserDetail\Commands\UpdateUser\" />
+  </ItemGroup>
+
 </Project>

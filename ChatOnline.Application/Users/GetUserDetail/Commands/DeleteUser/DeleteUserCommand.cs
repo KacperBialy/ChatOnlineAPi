@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatOnline.Application.Users.GetUserDetail
+namespace ChatOnline.Application.Users.GetUserDetail.Commands.DeleteUser
 {
-    public class GetUserDetailQuery : IRequest<UserDetailViewModel>
+    public class DeleteUserCommand : IRequest
     {
         public int UserId { get; set; }
     }
