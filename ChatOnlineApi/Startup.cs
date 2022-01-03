@@ -1,3 +1,4 @@
+using ChatOnline.Application;
 using ChatOnline.Infrastructure;
 using ChatOnline.Persistance;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,7 @@ namespace ChatOnlineApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddPersistance(Configuration);
 
