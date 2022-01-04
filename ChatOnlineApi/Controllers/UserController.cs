@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using ChatOnline.Application.Users.GetUserDetail.Queries;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,7 +12,7 @@ namespace ChatOnlineApi.Controllers
     [ApiController]
     [Route("api/account")]
     [EnableCors("MyAllowSpecificOrigins")]
-    public class AccountController : ControllerBase
+    public class UserController : BaseController
     {
         /// <summary>
         /// Register the user
@@ -37,6 +38,21 @@ namespace ChatOnlineApi.Controllers
         public async Task<ActionResult<string>> LogginUser()
         {
             return "Not implemented";
+        }
+
+        /// <summary>
+        /// User details
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("details")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserDetailViewModel>> Deatils(int id)
+        {
+            var userDetailViewModel = await Mediator.Send(new GetUserDetailQuery() { UserId = id });
+
+            return userDetailViewModel;
         }
     }
 }

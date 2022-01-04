@@ -1,4 +1,5 @@
-﻿using ChatOnline.Application.Common.Mappings;
+﻿using AutoMapper;
+using ChatOnline.Application.Common.Mappings;
 using ChatOnline.Domain.Entities;
 using System;
 using System.Collections.Generic;

@@ -4,18 +4,6 @@
         <name>ChatOnlineApi</name>
     </assembly>
     <members>
-        <member name="M:ChatOnlineApi.Controllers.AccountController.RegisterUser">
-            <summary>
-            Register the user
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ChatOnlineApi.Controllers.AccountController.LogginUser">
-            <summary>
-            User login
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:ChatOnlineApi.Controllers.FriendsController.GetAll">
             <summary>
             Retrieves all friends from the specified user
@@ -85,6 +73,24 @@
         <member name="M:ChatOnlineApi.Controllers.PostsController.Delete">
             <summary>
             Delete a post created by the specified user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.UserController.RegisterUser">
+            <summary>
+            Register the user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.UserController.LogginUser">
+            <summary>
+            User login
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatOnlineApi.Controllers.UserController.Deatils(System.Int32)">
+            <summary>
+            User details
             </summary>
             <returns></returns>
         </member>

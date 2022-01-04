@@ -24,7 +24,6 @@ namespace ChatOnline.Application.Users.GetUserDetail.Queries
             var user = await _context.Users.Where(user => user.Id == request.UserId).FirstOrDefaultAsync(cancellationToken);
 
             var userDetailViewModel = _mapper.Map<UserDetailViewModel>(user);
-
             return userDetailViewModel;
         }
     }
