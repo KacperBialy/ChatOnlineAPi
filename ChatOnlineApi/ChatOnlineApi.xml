@@ -88,6 +88,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ChatOnlineApi.Controllers.UserController.DeleteUser(System.Int32)">
+            <summary>
+            Delete a user by the specified id
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:ChatOnlineApi.Controllers.UserController.Deatils(System.Int32)">
             <summary>
             User details

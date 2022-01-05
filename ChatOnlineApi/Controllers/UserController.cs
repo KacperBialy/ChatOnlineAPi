@@ -1,10 +1,8 @@
-﻿using ChatOnline.Application.Users.GetUserDetail.Queries;
+﻿using ChatOnline.Application.Users.GetUserDetail.Commands.DeleteUser;
+using ChatOnline.Application.Users.GetUserDetail.Queries;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChatOnlineApi.Controllers
@@ -41,6 +39,23 @@ namespace ChatOnlineApi.Controllers
         }
 
         /// <summary>
+        /// Delete a user by the specified id
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("{userId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<ActionResult> DeleteUser(int userId)
+        {
+            await Mediator.Send(new DeleteUserCommand() { UserId = userId });
+            return NoContent();
+        }
+
+        /// <summary>
         /// User details
         /// </summary>
         /// <returns></returns>
@@ -52,7 +67,7 @@ namespace ChatOnlineApi.Controllers
         {
             var userDetailViewModel = await Mediator.Send(new GetUserDetailQuery() { UserId = id });
 
-            return userDetailViewModel;
+            return Ok(userDetailViewModel);
         }
     }
 }

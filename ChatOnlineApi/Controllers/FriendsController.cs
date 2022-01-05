@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ChatOnlineApi.Controllers
 {
+    [ApiController]
+    [Route("api/friends")]
+    [EnableCors("MyAllowSpecificOrigins")]
     public class FriendsController : Controller
     {
         /// <summary>
