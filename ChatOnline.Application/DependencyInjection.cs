@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using ChatOnline.Application.Common.Behaviours;
+using MediatR;
+using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

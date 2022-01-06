@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ChatOnlineApi.Controllers
 {
     [ApiController]
-    [Route("api/account")]
+    [Route("api/user")]
     [EnableCors("MyAllowSpecificOrigins")]
     public class UserController : BaseController
     {
