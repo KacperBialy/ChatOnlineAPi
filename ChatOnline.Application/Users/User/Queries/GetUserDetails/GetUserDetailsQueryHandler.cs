@@ -7,23 +7,23 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChatOnline.Application.Users.GetUserDetail.Queries
+namespace ChatOnline.Application.Users.GetUserDetail.Queries.GetUserDetails
 {
-    public class GetUserDetailQueryHandler : IRequestHandler<GetUserDetailQuery, UserDetailViewModel>
+    public class GetUserDetailsQueryHandler : IRequestHandler<GetUserDetailsQuery, UserDetailsViewModel>
     {
         private readonly IChatOnlineDbContext _context;
         private readonly IMapper _mapper;
-        public GetUserDetailQueryHandler(IChatOnlineDbContext chatOnlineDbContext, IMapper mapper)
+        public GetUserDetailsQueryHandler(IChatOnlineDbContext chatOnlineDbContext, IMapper mapper)
         {
             _context = chatOnlineDbContext;
             _mapper = mapper;
         }
 
-        public async Task<UserDetailViewModel> Handle(GetUserDetailQuery request, CancellationToken cancellationToken)
+        public async Task<UserDetailsViewModel> Handle(GetUserDetailsQuery request, CancellationToken cancellationToken)
         {
             var user = await _context.Users.Where(user => user.Id == request.UserId).FirstOrDefaultAsync(cancellationToken);
 
-            var userDetailViewModel = _mapper.Map<UserDetailViewModel>(user);
+            var userDetailViewModel = _mapper.Map<UserDetailsViewModel>(user);
             return userDetailViewModel;
         }
     }

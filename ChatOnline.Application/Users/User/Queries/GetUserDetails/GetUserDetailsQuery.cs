@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatOnline.Application.Users.GetUserDetail.Queries
+namespace ChatOnline.Application.Users.GetUserDetail.Queries.GetUserDetails
 {
-    public class GetUserDetailQuery : IRequest<UserDetailViewModel>
+    public class GetUserDetailsQuery : IRequest<UserDetailsViewModel>
     {
         public int UserId { get; set; }
     }
