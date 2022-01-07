@@ -1,5 +1,7 @@
-﻿using ChatOnline.Application.Users.GetUserDetail.Commands.DeleteUser;
+﻿using ChatOnline.Application.Users.GetUserDetail.Commands.CreateUser;
+using ChatOnline.Application.Users.GetUserDetail.Commands.DeleteUser;
 using ChatOnline.Application.Users.GetUserDetail.Queries;
+using ChatOnline.Application.Users.GetUserDetail.Queries.GetUserDetails;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +15,18 @@ namespace ChatOnlineApi.Controllers
     public class UserController : BaseController
     {
         /// <summary>
-        /// Register the user
+        /// Create the user
         /// </summary>
         /// <returns></returns>
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<string>> RegisterUser()
+        public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
-            return "Not implemented";
+            var result = await Mediator.Send(command);
+
+            return Ok(result);
         }
 
         /// <summary>

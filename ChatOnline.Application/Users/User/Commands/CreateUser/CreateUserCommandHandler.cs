@@ -23,7 +23,7 @@ namespace ChatOnline.Application.Users.GetUserDetail.Commands.CreateUser
         {
             var hashPassword = request.Password; // TODO -> Add hashing
 
-            var user = new User()
+            var user = new Domain.Entities.User()
             {
                 Name = request.Name,
                 Surname = request.Surname,

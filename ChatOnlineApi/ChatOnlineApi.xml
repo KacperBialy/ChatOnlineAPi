@@ -76,9 +76,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ChatOnlineApi.Controllers.UserController.RegisterUser">
+        <member name="M:ChatOnlineApi.Controllers.UserController.CreateUser(ChatOnline.Application.Users.GetUserDetail.Commands.CreateUser.CreateUserCommand)">
             <summary>
-            Register the user
+            Create the user
             </summary>
             <returns></returns>
         </member>
