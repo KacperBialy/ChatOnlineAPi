@@ -10,14 +10,13 @@ namespace ChatOnline.Persistance
 {
     public class ChatOnlineDbContextFactory : DesignTimeDbContextFactoryBase<ChatOnlineDbContext>
     {
-        private readonly IDateTime _dateTime;
-        public ChatOnlineDbContextFactory(IDateTime dateTime)
+
+        public ChatOnlineDbContextFactory()
         {
-            _dateTime = dateTime;
         }
         protected override ChatOnlineDbContext CreateNewInstance(DbContextOptions<ChatOnlineDbContext> options)
         {
-            return new ChatOnlineDbContext(options, _dateTime);
+            return new ChatOnlineDbContext();
         }
     }
 }

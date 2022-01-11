@@ -2,6 +2,7 @@
 using ChatOnline.Application.Users.GetUserDetail.Commands.DeleteUser;
 using ChatOnline.Application.Users.GetUserDetail.Queries;
 using ChatOnline.Application.Users.GetUserDetail.Queries.GetUserDetails;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace ChatOnlineApi.Controllers
 {
     [ApiController]
     [Route("api/user")]
-    [EnableCors("MyAllowSpecificOrigins")]
+    [Authorize]
     public class UserController : BaseController
     {
         /// <summary>
@@ -63,7 +64,7 @@ namespace ChatOnlineApi.Controllers
         /// User details
         /// </summary>
         /// <returns></returns>
-        [HttpGet("details")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

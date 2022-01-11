@@ -16,11 +16,16 @@ namespace ChatOnline.Persistance
     public class ChatOnlineDbContext : DbContext, IChatOnlineDbContext
     {
         private readonly IDateTime _dateTime;
-        public ChatOnlineDbContext(DbContextOptions<ChatOnlineDbContext> options, IDateTime dateTime) : base(options)
+        private readonly ICurrentUserService _currentUserService;
+        public ChatOnlineDbContext(DbContextOptions<ChatOnlineDbContext> options, IDateTime dateTime, ICurrentUserService currentUserService) : base(options)
         {
             _dateTime = dateTime;
+            _currentUserService = currentUserService;
         }
+        public ChatOnlineDbContext()
+        {
 
+        }
         public DbSet<Password> Messages { get; set; }
         public DbSet<Password> Passwords { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -41,21 +46,21 @@ namespace ChatOnline.Persistance
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = string.Empty;
+                        entry.Entity.CreatedBy = _currentUserService.Email;
                         entry.Entity.Created = _dateTime.Now;
                         entry.Entity.StatusId = 1;
                         break;
 
                     case EntityState.Modified:
-                        entry.Entity.ModifiedBy = string.Empty;
+                        entry.Entity.ModifiedBy = _currentUserService.Email;
                         entry.Entity.Modified = _dateTime.Now;
                         entry.Entity.StatusId = 1;
                         break;
 
                     case EntityState.Deleted:
-                        entry.Entity.ModifiedBy = string.Empty;
+                        entry.Entity.ModifiedBy = _currentUserService.Email;
                         entry.Entity.Modified = _dateTime.Now;
-                        entry.Entity.InactivatedBy = string.Empty;
+                        entry.Entity.InactivatedBy = _currentUserService.Email;
                         entry.Entity.Inactivated = _dateTime.Now;
                         entry.Entity.StatusId = 0;
                         entry.State = EntityState.Modified; // Show entity framework that we do not want to delete entity
