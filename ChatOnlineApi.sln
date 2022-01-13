@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatOnlineApi", "ChatOnlineApi\ChatOnlineApi.csproj", "{77B70744-767B-4F46-8526-C4CC1D7F8F63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatOnlineApi", "ChatOnlineApi\ChatOnlineApi.csproj", "{77B70744-767B-4F46-8526-C4CC1D7F8F63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{DFFF9A6E-AD65-4D8B-9ABE-C19074EA634C}"
 EndProject
@@ -11,15 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7FD35DBD-EA81-4FDE-B6FF-53565F7C55E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatOnline.Infrastructure", "ChatOnline.Infrastructure\ChatOnline.Infrastructure.csproj", "{269E6CBC-4E55-4184-9B88-6CB1972B3748}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatOnline.Infrastructure", "ChatOnline.Infrastructure\ChatOnline.Infrastructure.csproj", "{269E6CBC-4E55-4184-9B88-6CB1972B3748}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatOnline.Persistance", "ChatOnline.Persistance\ChatOnline.Persistance.csproj", "{B33915D0-9209-469F-9BA2-3807B29071A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatOnline.Persistance", "ChatOnline.Persistance\ChatOnline.Persistance.csproj", "{B33915D0-9209-469F-9BA2-3807B29071A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatOnline.Application", "ChatOnline.Application\ChatOnline.Application.csproj", "{1965BB41-8A16-416E-AF18-889D9E54AD93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatOnline.Application", "ChatOnline.Application\ChatOnline.Application.csproj", "{1965BB41-8A16-416E-AF18-889D9E54AD93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatOnline.Common", "ChatOnline.Common\ChatOnline.Common.csproj", "{D0E1B45D-5E01-4A20-8D25-50BDC86BEE55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatOnline.Common", "ChatOnline.Common\ChatOnline.Common.csproj", "{D0E1B45D-5E01-4A20-8D25-50BDC86BEE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatOnline.Domain", "ChatOnline.Domain\ChatOnline.Domain.csproj", "{AF8B2244-EB11-4813-A23B-CC1861AB6E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatOnline.Domain", "ChatOnline.Domain\ChatOnline.Domain.csproj", "{AF8B2244-EB11-4813-A23B-CC1861AB6E87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{52029311-2DAF-4959-9594-AB0D4F193215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{6755A335-B977-4DFD-BB26-A23681E57E04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{AF8B2244-EB11-4813-A23B-CC1861AB6E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF8B2244-EB11-4813-A23B-CC1861AB6E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF8B2244-EB11-4813-A23B-CC1861AB6E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6755A335-B977-4DFD-BB26-A23681E57E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6755A335-B977-4DFD-BB26-A23681E57E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6755A335-B977-4DFD-BB26-A23681E57E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6755A335-B977-4DFD-BB26-A23681E57E04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{1965BB41-8A16-416E-AF18-889D9E54AD93} = {7FD35DBD-EA81-4FDE-B6FF-53565F7C55E2}
 		{D0E1B45D-5E01-4A20-8D25-50BDC86BEE55} = {7FD35DBD-EA81-4FDE-B6FF-53565F7C55E2}
 		{AF8B2244-EB11-4813-A23B-CC1861AB6E87} = {7FD35DBD-EA81-4FDE-B6FF-53565F7C55E2}
+		{6755A335-B977-4DFD-BB26-A23681E57E04} = {52029311-2DAF-4959-9594-AB0D4F193215}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5272A3C5-0A72-4546-8848-4AC5744CF74A}
