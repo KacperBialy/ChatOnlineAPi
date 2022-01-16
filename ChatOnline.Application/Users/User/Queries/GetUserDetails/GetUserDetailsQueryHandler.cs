@@ -13,11 +13,10 @@ namespace ChatOnline.Application.Users.GetUserDetail.Queries.GetUserDetails
         private readonly IChatOnlineDbContext _context;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
-        public GetUserDetailsQueryHandler(IChatOnlineDbContext chatOnlineDbContext, IMapper mapper, ICurrentUserService currentUserService)
+        public GetUserDetailsQueryHandler(IChatOnlineDbContext chatOnlineDbContext, IMapper mapper)
         {
             _context = chatOnlineDbContext;
             _mapper = mapper;
-            _currentUserService = currentUserService;
         }
 
         public async Task<UserDetailsViewModel> Handle(GetUserDetailsQuery request, CancellationToken cancellationToken)
