@@ -7,8 +7,7 @@ namespace ChatOnline.Application.Common.Interfaces
 {
     public interface IChatOnlineDbContext
     {
-        DbSet<Password> Messages { get; set; }
-        DbSet<Password> Passwords { get; set; }
+        DbSet<Message> Messages { get; set; }
         DbSet<Post> Posts { get; set; }
         DbSet<User> Users { get; set; }
 

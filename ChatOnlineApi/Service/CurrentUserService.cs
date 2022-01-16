@@ -7,15 +7,18 @@ namespace ChatOnlineApi.Service
 {
     public class CurrentUserService : ICurrentUserService
     {
+        public string UserId { get; set; }
         public string Email { get; set; }
         public bool IsAuthenticated { get; set; }
         public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
             var email = httpContextAccessor.HttpContext?.User?.FindFirstValue(JwtClaimTypes.Email);
+            var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue("userName");
 
             Email = email;
+            UserId = userId;
 
-            IsAuthenticated = !string.IsNullOrEmpty(email);
+            IsAuthenticated = !string.IsNullOrEmpty(userId);
         }
     }
 }

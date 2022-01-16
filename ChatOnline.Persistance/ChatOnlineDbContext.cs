@@ -22,12 +22,7 @@ namespace ChatOnline.Persistance
             _dateTime = dateTime;
             _currentUserService = currentUserService;
         }
-        public ChatOnlineDbContext()
-        {
-
-        }
-        public DbSet<Password> Messages { get; set; }
-        public DbSet<Password> Passwords { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
 
@@ -46,21 +41,21 @@ namespace ChatOnline.Persistance
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.Email;
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
                         entry.Entity.Created = _dateTime.Now;
                         entry.Entity.StatusId = 1;
                         break;
 
                     case EntityState.Modified:
-                        entry.Entity.ModifiedBy = _currentUserService.Email;
+                        entry.Entity.ModifiedBy = _currentUserService.UserId;
                         entry.Entity.Modified = _dateTime.Now;
                         entry.Entity.StatusId = 1;
                         break;
 
                     case EntityState.Deleted:
-                        entry.Entity.ModifiedBy = _currentUserService.Email;
+                        entry.Entity.ModifiedBy = _currentUserService.UserId;
                         entry.Entity.Modified = _dateTime.Now;
-                        entry.Entity.InactivatedBy = _currentUserService.Email;
+                        entry.Entity.InactivatedBy = _currentUserService.UserId;
                         entry.Entity.Inactivated = _dateTime.Now;
                         entry.Entity.StatusId = 0;
                         entry.State = EntityState.Modified; // Show entity framework that we do not want to delete entity

@@ -21,8 +21,6 @@ namespace ChatOnline.Application.Users.GetUserDetail.Commands.CreateUser
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var hashPassword = request.Password; // TODO -> Add hashing
-
             var user = new Domain.Entities.User()
             {
                 Name = request.Name,
@@ -30,14 +28,6 @@ namespace ChatOnline.Application.Users.GetUserDetail.Commands.CreateUser
             };
 
             _context.Users.Add(user);
-
-            var password = new Password()
-            {
-                UserId = user.Id,
-                HashPassword = hashPassword,
-            };
-
-            _context.Passwords.Add(password);
 
             await _context.SaveChangesAsync(cancellationToken);
 
