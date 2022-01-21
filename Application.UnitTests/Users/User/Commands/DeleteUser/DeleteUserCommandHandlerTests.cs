@@ -15,6 +15,7 @@ namespace Application.UnitTests.Users.User.Commands.DeleteUser
     public class DeleteUserCommandHandlerTests : CommandTestBase
     {
         private readonly DeleteUserCommandHandler _handler;
+        private const int DeleteStatus = 0;
         public DeleteUserCommandHandlerTests() : base()
         {
             _handler = new DeleteUserCommandHandler(_context);
@@ -31,7 +32,7 @@ namespace Application.UnitTests.Users.User.Commands.DeleteUser
 
             var user = await _context.Users.FirstAsync(x => x.Id == command.UserId, CancellationToken.None);
 
-            user.StatusId.Should().Be(0);
+            user.StatusId.Should().Be(DeleteStatus);
         }
     }
 }
