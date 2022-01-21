@@ -1,13 +1,19 @@
 using ChatOnline.Application;
 using ChatOnline.Application.Common.Interfaces;
 using ChatOnline.Infrastructure;
+using ChatOnline.Infrastructure.Identity;
 using ChatOnline.Persistance;
 using ChatOnlineApi.Service;
+using IdentityModel;
+using IdentityServer4.Models;
+using IdentityServer4.Test;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -19,18 +25,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ChatOnlineApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -48,17 +57,68 @@ namespace ChatOnlineApi
                     });
             });
 
-            services.AddControllers();
+            if (Environment.IsEnvironment("Test"))
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("ChatOnline"));
+                });
 
-            services.AddAuthentication("Bearer")
-                    .AddJwtBearer(options =>
-                    {
-                        options.Authority = "https://localhost:5001";
-                        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+                services.AddIdentityServer()
+                        .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
                         {
-                            ValidateAudience = false
-                        };
+                            options.ApiResources.Add(new ApiResource("api1"));
+                            options.ApiScopes.Add(new ApiScope("ap1"));
+                            options.Clients.Add(new Client()
+                            {
+                                ClientId = "client",
+                                AllowedGrantTypes = { GrantType.ResourceOwnerPassword },
+                                ClientSecrets = { new Secret("secret".Sha256()) },
+                                AllowedScopes = { "openid", "profile", "ChatOnlineApi", "api1" }
+                            });
+                        }).AddTestUsers(new List<TestUser>()
+                        {
+                            new TestUser()
+                            {
+                                 SubjectId = "4B434A88-212D-4A4D-A17C-F35102D73CBB" ,
+                                 Username = "bob",
+                                 Password = "Pass123$",
+                                 Claims = new List<Claim>()
+                                 {
+                                     new Claim(JwtClaimTypes.Email, "BobSmith@email.com"),
+                                     new Claim(JwtClaimTypes.Name, "bob"),
+                                 }
+                            }
+                        });
+
+                services.AddAuthentication("Bearer").AddIdentityServerJwt();
+            }
+            else
+            {
+                services.AddAuthentication("Bearer")
+                        .AddJwtBearer(options =>
+                        {
+                            options.Authority = "https://localhost:5001";
+                            options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                            {
+                                ValidateAudience = false
+                            };
+                        });
+
+
+
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("ApiScope", policy =>
+                    {
+                        policy.RequireAuthenticatedUser();
+                        policy.RequireClaim("scope", "api1");
                     });
+                });
+            }
+
+            services.AddControllers();
 
             services.AddSwaggerGen(options =>
             {
@@ -71,7 +131,7 @@ namespace ChatOnlineApi
                         {
                             AuthorizationUrl = new Uri("https://localhost:5001/connect/authorize"),
                             TokenUrl = new Uri("https://localhost:5001/connect/token"),
-                            Scopes = new Dictionary<string,string>
+                            Scopes = new Dictionary<string, string>
                             {
                                 {"api1", "Full acess"},
                                 {"user", "User info"}
@@ -92,14 +152,6 @@ namespace ChatOnlineApi
                 options.IncludeXmlComments(filePath);
             });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("ApiScope", policy =>
-                {
-                    policy.RequireAuthenticatedUser();
-                    policy.RequireClaim("scope", "api1");
-                });
-            });
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -132,6 +184,10 @@ namespace ChatOnlineApi
 
             app.UseRouting();
             app.UseAuthorization();
+            if(Environment.IsEnvironment("Test"))
+            {
+                app.UseIdentityServer();
+            }
 
             app.UseCors();
 
