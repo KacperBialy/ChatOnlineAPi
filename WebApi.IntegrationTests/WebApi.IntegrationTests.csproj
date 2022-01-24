@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="IdentityModel" Version="5.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.13" />
@@ -26,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChatOnline.Persistance\ChatOnline.Persistance.csproj" />
+    <ProjectReference Include="..\ChatOnlineApi\ChatOnlineApi.csproj" />
   </ItemGroup>
 
 </Project>
