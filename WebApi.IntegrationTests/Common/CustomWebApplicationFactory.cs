@@ -1,12 +1,16 @@
 ﻿using ChatOnline.Application.Common.Interfaces;
+using ChatOnline.Infrastructure.Services;
 using ChatOnline.Persistance;
 using ChatOnlineApi;
+using ChatOnlineApi.Service;
 using IdentityModel.Client;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -31,11 +35,17 @@ namespace WebApi.IntegrationTests.Common
                     .AddEntityFrameworkInMemoryDatabase()
                     .BuildServiceProvider();
 
+
                     services.AddDbContext<ChatOnlineDbContext>(options =>
                     {
                         options.UseInMemoryDatabase("InMemoryDatabaseForTesting");
                         options.UseInternalServiceProvider(serviceProvider);
                     });
+
+                    services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+                    services.AddScoped(typeof(ICurrentUserService), typeof(CurrentUserService));
+                    services.AddTransient<IDateTime, DateTimeService>();
 
                     services.AddScoped<IChatOnlineDbContext>(provider => provider.GetService<ChatOnlineDbContext>());
 
