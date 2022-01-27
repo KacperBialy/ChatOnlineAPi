@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using WebApi.IntegrationTests.Common;
 using Xunit;
 
-namespace WebApi.IntegrationTests.Controllers.Users
+namespace WebApi.IntegrationTests.Controllers.Users.Queries.GetUserDetails
 {
     public class GetDetailsTests : IClassFixture<CustomWebApplicationFactory<Startup>>
     {

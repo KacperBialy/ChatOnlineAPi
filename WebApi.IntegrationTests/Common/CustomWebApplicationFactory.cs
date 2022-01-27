@@ -20,6 +20,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using WebApi.IntegrationTests.Common.DummyServices;
 
 namespace WebApi.IntegrationTests.Common
 {
@@ -44,7 +45,7 @@ namespace WebApi.IntegrationTests.Common
 
                     services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-                    services.AddScoped(typeof(ICurrentUserService), typeof(CurrentUserService));
+                    services.AddScoped(typeof(ICurrentUserService), typeof(DummyCurrentUserService));
                     services.AddTransient<IDateTime, DateTimeService>();
 
                     services.AddScoped<IChatOnlineDbContext>(provider => provider.GetService<ChatOnlineDbContext>());

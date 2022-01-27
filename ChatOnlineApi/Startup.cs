@@ -153,7 +153,7 @@ namespace ChatOnlineApi
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped(typeof(ICurrentUserService), typeof(CurrentUserService));
+            services.TryAddScoped(typeof(ICurrentUserService), typeof(CurrentUserService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
