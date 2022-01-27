@@ -47,6 +47,7 @@ namespace ChatOnlineApi
             services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddPersistance(Configuration);
+            services.AddControllers();
 
             services.AddCors(options =>
             {
@@ -61,7 +62,7 @@ namespace ChatOnlineApi
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("ChatOnline"));
+                    options.UseSqlServer(Configuration.GetConnectionString("ChatOnlineDatabase"));
                 });
 
                 services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -69,13 +70,13 @@ namespace ChatOnlineApi
                         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
                         {
                             options.ApiResources.Add(new ApiResource("api1"));
-                            options.ApiScopes.Add(new ApiScope("ap1"));
+                            options.ApiScopes.Add(new ApiScope("api1"));
                             options.Clients.Add(new Client()
                             {
                                 ClientId = "client",
                                 AllowedGrantTypes = { GrantType.ResourceOwnerPassword },
                                 ClientSecrets = { new Secret("secret".Sha256()) },
-                                AllowedScopes = { "openid", "profile", "ChatOnlineApi", "api1" }
+                                AllowedScopes = { "api1" }
                             });
                         }).AddTestUsers(new List<TestUser>()
                         {
@@ -107,7 +108,6 @@ namespace ChatOnlineApi
                         });
 
 
-
                 services.AddAuthorization(options =>
                 {
                     options.AddPolicy("ApiScope", policy =>
@@ -117,8 +117,6 @@ namespace ChatOnlineApi
                     });
                 });
             }
-
-            services.AddControllers();
 
             services.AddSwaggerGen(options =>
             {
@@ -184,19 +182,18 @@ namespace ChatOnlineApi
 
             app.UseRouting();
             app.UseAuthorization();
-            if(Environment.IsEnvironment("Test"))
+
+            if (Environment.IsEnvironment("Test"))
             {
                 app.UseIdentityServer();
             }
 
             app.UseCors();
 
-            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers()
-                         .RequireAuthorization("ApiScope");
+                endpoints.MapControllers();
             });
         }
     }

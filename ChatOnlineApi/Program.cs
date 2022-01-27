@@ -25,7 +25,7 @@ namespace ChatOnlineApi
             try
             {
                 Log.Information("Application is starting up");
-                CreateHostBuilder(args).UseSerilog().Build().Run();
+                CreateWebHostBuilder(args).UseSerilog().Build().Run();
             }
             catch (Exception exception)
             {
@@ -37,11 +37,12 @@ namespace ChatOnlineApi
             }
         }
 
-        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
                 var env = hostingContext.HostingEnvironment;
+
                 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                       .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                       .AddJsonFile($"appsettings.Local.json", optional: true, reloadOnChange: true);

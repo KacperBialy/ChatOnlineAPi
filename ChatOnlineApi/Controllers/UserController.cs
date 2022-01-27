@@ -12,7 +12,7 @@ namespace ChatOnlineApi.Controllers
 {
     [ApiController]
     [Route("api/user")]
-    [Authorize]
+    //[Authorize]
     public class UserController : BaseController
     {
         /// <summary>

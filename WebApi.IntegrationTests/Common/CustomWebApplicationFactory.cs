@@ -1,10 +1,17 @@
 ﻿using ChatOnline.Application.Common.Interfaces;
+using ChatOnline.Infrastructure.Services;
 using ChatOnline.Persistance;
+using ChatOnlineApi;
+using ChatOnlineApi.Service;
 using IdentityModel.Client;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
@@ -28,11 +35,17 @@ namespace WebApi.IntegrationTests.Common
                     .AddEntityFrameworkInMemoryDatabase()
                     .BuildServiceProvider();
 
+
                     services.AddDbContext<ChatOnlineDbContext>(options =>
                     {
-                        options.UseInMemoryDatabase("InMemoryDatabase");
+                        options.UseInMemoryDatabase("InMemoryDatabaseForTesting");
                         options.UseInternalServiceProvider(serviceProvider);
                     });
+
+                    services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+                    services.AddScoped(typeof(ICurrentUserService), typeof(CurrentUserService));
+                    services.AddTransient<IDateTime, DateTimeService>();
 
                     services.AddScoped<IChatOnlineDbContext>(provider => provider.GetService<ChatOnlineDbContext>());
 
@@ -75,24 +88,26 @@ namespace WebApi.IntegrationTests.Common
             return client;
         }
 
-        private async Task<string> GetAccessTokenAsync(HttpClient client, string v1, string v2)
+        private async Task<string> GetAccessTokenAsync(HttpClient client, string userName, string password)
         {
             var disco = await client.GetDiscoveryDocumentAsync();
 
-            if(disco.IsError)
+            if (disco.IsError)
             {
                 throw new Exception(disco.Error);
             }
 
-            var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest()
+            var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
-                Address = disco.TokenEndpoint,
                 ClientId = "client",
+                Address = disco.TokenEndpoint,
                 ClientSecret = "secret",
-                Scope = "openid profile ChatOnlineAPi api1"
+                Scope = "api1",
+                UserName = userName,
+                Password = password
             });
 
-            if(response.IsError)
+            if (response.IsError)
             {
                 throw new Exception(response.Error);
             }
