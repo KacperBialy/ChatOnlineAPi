@@ -1,3 +1,5 @@
+Project continued at https://dev.azure.com/kacper1400/ChatOnline
+
 # ChatOnlineAPi
 Api to manage users and their chat messages
 
